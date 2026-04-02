@@ -1,0 +1,113 @@
+id,ko_word,word_en,example_ko_display,example_ko_tts,example_en,example_jp
+1,이름,name,name 제 이름은 유나예요.,제 이름은 유나예요.,My name is Yuna.,私の名前はユナです。
+2,뭐,what,what 이거 뭐예요?,이거 뭐예요?,What is this?,これは何ですか？
+3,어떻게,how,how 어떻게 가요?,어떻게 가요?,How do I get there?,どうやって行きますか？
+4,부르다,to call (someone by name),to call (someone by name) 저를 민지라고 불러 주세요.,저를 민지라고 불러 주세요.,Please call me Minji.,私をミンジと呼んでください。
+5,되다,to become; to be okay,to become; to be okay 이거 해도 돼요?,이거 해도 돼요?,Is it okay if I do this?,これしてもいいですか？
+6,고향,hometown,hometown 제 고향은 부산이에요.,제 고향은 부산이에요.,My hometown is Busan.,私の出身は釜山です。
+7,어디,where,where 화장실이 어디예요?,화장실이 어디예요?,Where is the restroom?,トイレはどこですか？
+8,그,that (near the listener),that (near the listener) 그 사람은 제 친구예요.,그 사람은 제 친구예요.,That person is my friend.,あの人は私の友達です。
+9,동네,neighborhood,neighborhood 이 동네는 조용해요.,이 동네는 조용해요.,This neighborhood is quiet.,この辺（町）は静かです。
+10,제일,the most; best,the most; best 여기서 제일 맛있는 건 뭐예요?,여기서 제일 맛있는 건 뭐예요?,What is the most delicious thing here?,ここで一番おいしいものは何ですか？
+11,좋아하다,to like,to like 저는 커피를 좋아해요.,저는 커피를 좋아해요.,I like coffee.,私はコーヒーが好きです。
+12,곳,place,place 여기는 정말 좋은 곳이에요.,여기는 정말 좋은 곳이에요.,This is a really nice place.,ここは本当に良い場所です。
+13,살다,to live,to live 저는 서울에 살아요.,저는 서울에 살아요.,I live in Seoul.,私はソウルに住んでいます。
+14,있다,to be; to exist; to have,to be; to exist; to have 시간 있어요?,시간 있어요?,Do you have time?,時間ありますか？
+15,저,I (polite),I (polite) 저는 학생이에요.,저는 학생이에요.,I am a student.,私は学生です。
+16,나,I (casual),I (casual) 나는 지금 집이야.,나는 지금 집이야.,I'm at home now.,今家だよ。
+17,너,you (casual),you (casual) 너는 뭐 먹고 싶어?,너는 뭐 먹고 싶어?,What do you want to eat?,君は何が食べたい？
+18,당신,you (polite; context-sensitive),you (polite; context-sensitive) 당신은 정말 친절해요.,당신은 정말 친절해요.,You are really kind.,あなたは本当に親切です。
+19,잘,well; nicely,well; nicely 오늘 시험을 잘 봤어요.,오늘 시험을 잘 봤어요.,I did well on the test today.,今日はテストがうまくいきました。
+20,지내다,to get along; to be doing,to get along; to be doing 요즘 어떻게 지내요?,요즘 어떻게 지내요?,How have you been lately?,最近どう過ごしていますか？
+21,요즘 / 요새,these days,these days 요새 날씨가 많이 춥네요.,요새 날씨가 많이 춥네요.,These days the weather is very cold.,最近、天気がとても寒いですね。
+22,안녕,hi; hello,hi; hello 안녕! 오랜만이야.,안녕! 오랜만이야.,Hi! Long time no see.,やあ！久しぶり。
+23,지금,now,now 지금 출발할게요.,지금 출발할게요.,I'll leave now.,今出発します。
+24,같이,together,together 같이 영화 볼래요?,같이 영화 볼래요?,Do you want to watch a movie together?,一緒に映画見ませんか？
+25,얘기하다 / 이야기하다,to talk; to chat,to talk; to chat 우리 잠깐 이야기해요.,우리 잠깐 이야기해요.,Let’s talk for a moment.,ちょっと話そう。
+26,일본어,Japanese (language),Japanese (language) 일본어를 조금 할 줄 알아요.,일본어를 조금 할 줄 알아요.,I can speak a little Japanese.,日本語を少し話せます。
+27,영어,English (language),English (language) 영어로 설명해 주세요.,영어로 설명해 주세요.,Please explain in English.,英語で説明してください。
+28,한국어,Korean (language),Korean (language) 한국어 발음이 어려워요.,한국어 발음이 어려워요.,Korean pronunciation is difficult.,韓国語の発音は難しいです。
+29,공부하다,to study,to study 저는 매일 한국어를 공부해요.,저는 매일 한국어를 공부해요.,I study Korean every day.,私は毎日韓国語を勉強します。
+30,사람,person,person 그 사람을 알아요.,그 사람을 알아요.,I know that person.,その人を知っています。
+31,한 명,one person,one person 손님이 한 명 왔어요.,손님이 한 명 왔어요.,One guest came.,お客さんが一人来ました。
+32,크리스마스,Christmas,Christmas 크리스마스에 가족을 만났어요.,크리스마스에 가족을 만났어요.,I met my family on Christmas.,クリスマスに家族に会いました。
+33,얼마나,how long; how much,how long; how much 얼마나 걸려요?,얼마나 걸려요?,How long does it take?,どれくらいかかりますか？
+34,동안,during; for (a period of time),during; for (a period of time) 한 시간 동안 기다렸어요.,한 시간 동안 기다렸어요.,I waited for one hour.,1時間待ちました。
+35,취미,hobby,hobby 취미가 뭐예요?,취미가 뭐예요?,What is your hobby?,趣味は何ですか？
+36,마음,heart; feelings,heart; feelings 마음이 편해졌어요.,마음이 편해졌어요.,My heart feels at ease.,気持ちが楽になりました。
+37,편하다,to feel comfortable; relaxed,to feel comfortable; relaxed 이 의자는 정말 편해요.,이 의자는 정말 편해요.,This chair is really comfortable.,この椅子は本当に楽です。
+38,일본,Japan,Japan 일본에 가 본 적이 있어요.,일본에 가 본 적이 있어요.,I have been to Japan.,日本に行ったことがあります。
+39,여행,trip; travel,trip; travel 이번 주말에 여행 갈 거예요.,이번 주말에 여행 갈 거예요.,I will go on a trip this weekend.,今週末旅行に行きます。
+40,기억,memory,memory 그날을 기억해요.,그날을 기억해요.,I remember that day.,あの日を覚えています。
+41,친구,friend,friend 친구와 커피를 마셨어요.,친구와 커피를 마셨어요.,I drank coffee with a friend.,友達とコーヒーを飲みました。
+42,서로,each other,each other 우리는 서로 도와요.,우리는 서로 도와요.,We help each other.,私たちはお互い助け合います。
+43,언제,when,when 언제 시간이 돼요?,언제 시간이 돼요?,When do you have time?,いつ時間がありますか？
+44,사랑,love,love 사랑은 때로 어려워요.,사랑은 때로 어려워요.,Love is sometimes difficult.,愛は時々難しいです。
+45,음악,music,music 음악을 들으면 기분이 좋아요.,음악을 들으면 기분이 좋아요.,I feel good when I listen to music.,音楽を聴くと気分が良くなります。
+46,라이브 공연,live concert; live show,live concert; live show 어제 라이브 공연을 봤어요.,어제 라이브 공연을 봤어요.,I watched a live concert yesterday.,昨日ライブ公演を見ました。
+47,뜻,meaning,meaning 이 단어의 뜻이 뭐예요?,이 단어의 뜻이 뭐예요?,What does this word mean?,この単語の意味は何ですか？
+48,농구,basketball,basketball 저는 농구를 좋아해요.,저는 농구를 좋아해요.,I like basketball.,私はバスケが好きです。
+49,학교,school,school 학교에 늦었어요.,학교에 늦었어요.,I was late for school.,学校に遅れました。
+50,동아리,(school) club; circle,(school) club; circle 대학교에서 사진 동아리를 했어요.,대학교에서 사진 동아리를 했어요.,I was in a photography club in college.,大学で写真サークルをしていました。
+51,담배,cigarette,cigarette 여기서 담배 피우면 안 돼요.,여기서 담배 피우면 안 돼요.,You must not smoke here.,ここでタバコを吸ってはいけません。
+52,맥주,beer,beer 맥주 한 잔 주세요.,맥주 한 잔 주세요.,"One beer, please.",ビール一杯ください。
+53,옷,clothes,clothes 이 옷이 정말 잘 어울려요.,이 옷이 정말 잘 어울려요.,These clothes suit you very well.,この服、すごく似合います。
+54,전주,Jeonju (a city in Korea),Jeonju (a city in Korea) 전주는 비빔밥이 유명해요.,전주는 비빔밥이 유명해요.,Jeonju is famous for bibimbap.,全州はビビンバで有名です。
+55,직장,workplace,workplace 제 직장은 집에서 멀어요.,제 직장은 집에서 멀어요.,My workplace is far from home.,職場が家から遠いです。
+56,버스,bus,bus 버스는 몇 번이에요?,버스는 몇 번이에요?,What number is the bus?,バスは何番ですか？
+57,지하철,subway; metro,subway; metro 지하철로 가는 게 빨라요.,지하철로 가는 게 빨라요.,Going by subway is faster.,地下鉄で行く方が速いです。
+58,열쇠,key,key 열쇠를 잃어버렸어요.,열쇠를 잃어버렸어요.,I lost my key.,鍵をなくしました。
+59,분,person (honorific),person (honorific) 저 분은 선생님이에요.,저 분은 선생님이에요.,That person is a teacher.,あの方は先生です。
+60,시간,time,time 지금 시간이 없어요.,지금 시간이 없어요.,I don’t have time right now.,今時間がありません。
+61,요리,dish; cuisine,dish; cuisine 매운 요리는 잘 못 먹어요.,매운 요리는 잘 못 먹어요.,I can't eat spicy dishes well.,辛い料理はあまり食べられません。
+62,음식,food,food 이 음식은 너무 맛있어요.,이 음식은 너무 맛있어요.,This food is so delicious.,この料理はとてもおいしいです。
+63,술,alcohol; liquor,alcohol; liquor 술을 조금만 마실게요.,술을 조금만 마실게요.,I’ll drink just a little alcohol.,お酒は少しだけ飲みます。
+64,이거,this (thing),this (thing) 이거 얼마예요?,이거 얼마예요?,How much is this?,これはいくらですか？
+65,현금,cash,cash 현금으로 계산할게요.,현금으로 계산할게요.,I'll pay in cash.,現金で払います。
+66,카드,"card (credit card, etc.)","card (credit card, etc.) 카드로 결제해도 돼요?",카드로 결제해도 돼요?,Can I pay by card?,カードで支払ってもいいですか？
+67,번역하다,to translate,to translate 이 문장 좀 번역해 주세요.,이 문장 좀 번역해 주세요.,Please translate this sentence.,この文を翻訳してください。
+68,커피,coffee,coffee 아침에 커피를 마셔요.,아침에 커피를 마셔요.,I drink coffee in the morning.,朝にコーヒーを飲みます。
+69,연락하다,to contact,to contact 나중에 연락할게요.,나중에 연락할게요.,I'll contact you later.,後で連絡します。
+70,기쁘다,to be glad; happy,to be glad; happy 당신을 만나서 기뻐요.,당신을 만나서 기뻐요.,I'm happy to meet you.,会えてうれしいです。
+71,메시지,message,message 메시지를 확인했어요.,메시지를 확인했어요.,I checked the message.,メッセージを確認しました。
+72,보내다,to send,to send 파일을 이메일로 보내 주세요.,파일을 이메일로 보내 주세요.,Please send the file by email.,ファイルをメールで送ってください。
+73,만나다 / 만나게 되다,to meet; to end up meeting,to meet; to end up meeting 우리는 공항에서 우연히 만나게 됐어요.,우리는 공항에서 우연히 만나게 됐어요.,We ended up meeting by chance at the airport.,私たちは空港で偶然出会いました。
+74,운명,fate; destiny,fate; destiny 이 만남은 운명 같아요.,이 만남은 운명 같아요.,This meeting feels like fate.,この出会いは運命みたいです。
+75,가르치다,to teach,to teach 저에게 한국어를 가르쳐 주세요.,저에게 한국어를 가르쳐 주세요.,Please teach me Korean.,私に韓国語を教えてください。
+76,더,more,more 조금 더 천천히 말해 주세요.,조금 더 천천히 말해 주세요.,Please speak a little more slowly.,もう少しゆっくり話してください。
+77,나중에,later,later 나중에 다시 올게요.,나중에 다시 올게요.,I'll come back later.,後でまた来ます。
+78,많이,a lot; much,a lot; much 오늘 많이 걸었어요.,오늘 많이 걸었어요.,I walked a lot today.,今日はたくさん歩きました。
+79,싶다,to want to (do),to want to (do) 지금 쉬고 싶어요.,지금 쉬고 싶어요.,I want to rest now.,今休みたいです。
+80,할 수 있다,can do,can do 저도 할 수 있어요.,저도 할 수 있어요.,I can do it too.,私もできます。
+81,말하다,to speak; to talk,to speak; to talk 한국어로 말해 주세요.,한국어로 말해 주세요.,Please speak in Korean.,韓国語で話してください。
+82,알다,to know,to know 그 사실을 알고 있어요.,그 사실을 알고 있어요.,I know that fact.,その事実を知っています。
+83,가다,to go,to go 내일 병원에 갈 거예요.,내일 병원에 갈 거예요.,I will go to the hospital tomorrow.,明日病院に行きます。
+84,남다,to remain; to stay,to remain; to stay 음식이 조금 남았어요.,음식이 조금 남았어요.,There is a little food left.,料理が少し残りました。
+85,다니다,to attend; to go regularly,to attend; to go regularly 저는 매일 회사에 다녀요.,저는 매일 회사에 다녀요.,I go to work every day.,私は毎日会社に通っています。
+86,없다,to not exist; to not have,to not exist; to not have 지금 돈이 없어요.,지금 돈이 없어요.,I don't have money right now.,今お金がありません。
+87,알리다,to let someone know; to tell,to let someone know; to tell 결과를 바로 알려 주세요.,결과를 바로 알려 주세요.,Please let me know the result right away.,結果をすぐ知らせてください。
+88,추천하다,to recommend,to recommend 이 식당을 추천해요.,이 식당을 추천해요.,I recommend this restaurant.,このレストランをおすすめします。
+89,교재,textbook; study material,textbook; study material 좋은 교재를 찾고 있어요.,좋은 교재를 찾고 있어요.,I'm looking for good study materials.,良い教材を探しています。
+90,일,thing; matter; event,thing; matter; event 오늘 재미있는 일이 있었어요.,오늘 재미있는 일이 있었어요.,Something interesting happened today.,今日は面白いことがありました。
+91,어울리다,to go well with; to suit,to go well with; to suit 이 신발이 옷이랑 잘 어울려요.,이 신발이 옷이랑 잘 어울려요.,These shoes go well with the clothes.,この靴は服によく合います。
+92,유명하다,to be famous,to be famous 그 카페는 디저트가 유명해요.,그 카페는 디저트가 유명해요.,That cafe is famous for desserts.,そのカフェはデザートが有名です。
+93,자다,to sleep,to sleep 어제 일찍 잤어요.,어제 일찍 잤어요.,I slept early yesterday.,昨日は早く寝ました。
+94,계산하다,to pay (the bill); to calculate,to pay (the bill); to calculate 여기서 계산할게요.,여기서 계산할게요.,I'll pay here.,ここで会計します。
+95,좋아지다,to become better; to come to like,to become better; to come to like 날씨가 좋아졌어요.,날씨가 좋아졌어요.,The weather got better.,天気が良くなりました。
+96,낫다,to be better,to be better 이게 저것보다 더 나아요.,이게 저것보다 더 나아요.,This is better than that.,これはあれより良いです。
+97,아직,still; not yet,still; not yet 아직 준비가 안 됐어요.,아직 준비가 안 됐어요.,I'm not ready yet.,まだ準備ができていません。
+98,보통,usually,usually 보통 몇 시에 일어나요?,보통 몇 시에 일어나요?,What time do you usually wake up?,普段は何時に起きますか？
+99,조금만,just a little (bit),just a little (bit) 조금만 기다려 주세요.,조금만 기다려 주세요.,Please wait just a moment.,少しだけ待ってください。
+100,천천히,slowly,slowly 천천히 걸어요.,천천히 걸어요.,Walk slowly.,ゆっくり歩きましょう。
+101,다들,everyone; all (people),everyone; all (people) 다들 괜찮아요?,다들 괜찮아요?,Is everyone okay?,みんな大丈夫？
+102,이렇게,like this,like this 이렇게 하면 돼요.,이렇게 하면 돼요.,You can do it like this.,こうすればいいです。
+103,정말,really,really 정말 맛있어요!,정말 맛있어요!,It's really delicious!,本当においしい！
+104,자꾸,repeatedly; keep (doing),repeatedly; keep (doing) 휴대폰을 자꾸 잊어버려요.,휴대폰을 자꾸 잊어버려요.,I keep forgetting my phone.,携帯を何度も忘れます。
+105,이제,now; from now on,now; from now on 이제 시작해요.,이제 시작해요.,Now we start.,では始めます。
+106,슬슬,slowly; little by little,slowly; little by little 슬슬 집에 갈까요?,슬슬 집에 갈까요?,Shall we slowly head home?,そろそろ家に帰ろうか？
+107,그리고,and; and then,and; and then 그리고 다음 문제로 넘어가요.,그리고 다음 문제로 넘어가요.,And then we move to the next question.,そして次の問題に進みます。
+108,혹시,by any chance,by any chance 혹시 시간 있어요?,혹시 시간 있어요?,"By any chance, do you have time?",もしかして時間ありますか？
+109,본 적 있다,to have experienced; to have done,to have experienced; to have done 그 영화를 본 적 있어요.,그 영화를 본 적 있어요.,I've seen that movie before.,その映画を見たことがあります。
+110,기억에 남다,to remain in one’s memory,to remain in one’s memory 그 여행이 정말 기억에 남아요.,그 여행이 정말 기억에 남아요.,That trip really stays in my memory.,その旅行は本当に記憶に残ります。
+111,알아가다,to get to know (gradually),to get to know (gradually) 우리는 서로를 천천히 알아가요.,우리는 서로를 천천히 알아가요.,We gradually get to know each other.,私たちはゆっくりお互いを知っていきます。
+112,만나게 되다,to end up meeting; to come to meet,to end up meeting; to come to meet 새로운 친구를 만나게 되었어요.,새로운 친구를 만나게 되었어요.,I ended up meeting a new friend.,新しい友達に出会うことになりました。

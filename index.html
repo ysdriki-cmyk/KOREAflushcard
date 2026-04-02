@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>韓国語単語 6択テスト</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <div class="app">
+    <h1 id="appTitle">韓国語単語 6択テスト</h1>
+    <div class="sub" id="appSubtitle">
+      公開GoogleスプレッドシートまたはローカルCSVから単語リストを読み込みます。
+    </div>
+
+    <div class="status-bar">
+      <div id="dataSourceLabel">データ読込中...</div>
+      <button id="reloadBtn" class="ghost small-btn" type="button">再読込</button>
+    </div>
+
+    <div class="top-row">
+      <div>問題：<span id="qIndex">0</span> / <span id="qTotal">0</span></div>
+      <div class="mode-buttons">
+        <button id="modeOrderBtn" class="mode-btn mode-active" type="button">順番モード</button>
+        <button id="modeShuffleBtn" class="mode-btn mode-inactive" type="button">シャッフルモード</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">韓国語（問題）</div>
+      <div id="koWord" class="ko-text-main">読込中...</div>
+
+      <div class="btn-row">
+        <button class="audio-btn" id="speakKo" type="button">韓国語を読む</button>
+        <button class="audio-btn" id="speakEn" type="button">英語を読む</button>
+        <button id="prevBtn" class="ghost" type="button">前の問題</button>
+        <button id="nextBtn" class="ghost" type="button">次の問題</button>
+      </div>
+
+      <div class="label">正しい英語の意味を選んでください（6択）</div>
+      <div id="options" class="mc-options"></div>
+
+      <div id="result" class="result"></div>
+      <div id="correctAnswer" class="correct-answer"></div>
+
+      <div id="exampleBlock" class="example-block">
+        <div class="label">例文</div>
+        <div class="example-line">
+          <strong>韓国語:</strong>
+          <span id="exKo"></span>
+          <button class="audio-btn" id="exSpeakKo" type="button">例文を読む</button>
+        </div>
+        <div class="example-line"><strong>English:</strong> <span id="exEn"></span></div>
+        <div class="example-line"><strong>日本語:</strong> <span id="exJp"></span></div>
+      </div>
+    </div>
+
+    <div class="memo-block">
+      <div class="label">メモ（ブラウザを閉じると消えます）</div>
+      <textarea id="memoBox" placeholder="気づいたこと、自分なりの訳、連想イメージなどを書いておく場所"></textarea>
+    </div>
+
+    <div class="bottom-row">
+      <div>Cloudflare Pagesへそのまま配置できる静的サイト構成です。</div>
+      <div id="errorMessage" class="error-message"></div>
+    </div>
+  </div>
+
+  <script src="./assets/config.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>

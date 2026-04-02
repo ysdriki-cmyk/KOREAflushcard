@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>韓国語単語 112語 6択テスト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f7f7fb;
+    }
+    .app {
+      width: 100%;
+      max-width: 720px;
+      background: #ffffff;
+      padding: 20px 16px 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      border-radius: 18px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.2rem;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+    .sub {
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .mode-buttons {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .mode-btn {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mode-active {
+      background: #4b6bff;
+      color: #fff;
+    }
+    .mode-inactive {
+      background: #f5f5f5;
+      color: #444;
+    }
+
+    .card {
+      border-radius: 16px;
+      border: 1px solid #eee;
+      background: linear-gradient(145deg, #ffffff, #f0f4ff);
+      padding: 16px 14px;
+      margin-bottom: 12px;
+    }
+    .label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    .ko-text-main {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      word-break: keep-all;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.1s, transform 0.05s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .primary {
+      background: #4b6bff;
+      color: #fff;
+    }
+    .primary:hover {
+      background: #364dd6;
+      transform: translateY(-1px);
+    }
+    .ghost {
+      background: #f5f5f5;
+      color: #444;
+    }
+    .ghost:hover {
+      background: #eaeaea;
+      transform: translateY(-1px);
+    }
+    .audio-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+    .audio-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .mc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .mc-option {
+      text-align: left;
+      background: #fff;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.1s, transform 0.05s, border-color 0.1s;
+    }
+    .mc-option:hover:not(:disabled) {
+      background: #f3f3ff;
+      transform: translateY(-1px);
+    }
+    .mc-option.correct-choice {
+      background: #e5f7eb;
+      border-color: #25a768;
+    }
+    .mc-option.wrong-choice {
+      background: #fde9e7;
+      border-color: #d14343;
+    }
+
+    .result {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .correct {
+      color: #1a8f3a;
+      font-weight: 600;
+    }
+    .incorrect {
+      color: #d14343;
+      font-weight: 600;
+    }
+    .correct-answer {
+      margin-top: 4px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .example-block {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px dashed #ccc;
+      font-size: 0.85rem;
+    }
+    .example-line {
+      margin-bottom: 3px;
+    }
+
+    .memo-block {
+      margin-top: 10px;
+    }
+    .memo-block textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #666;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        border-radius: 0;
+        max-width: none;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+      .ko-text-main {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <h1>韓国語単語 6択テスト（112語）</h1>
+  <div class="sub">韓国語の単語を見て、正しい英語の意味を選んでください。</div>
+
+  <div class="top-row">
+    <div>問題：<span id="qIndex">1</span> / <span id="qTotal">112</span></div>
+    <div class="mode-buttons">
+      <button id="modeOrderBtn" class="mode-btn mode-active">順番モード</button>
+      <button id="modeShuffleBtn" class="mode-btn mode-inactive">シャッフルモード</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">韓国語（問題）</div>
+    <div id="koWord" class="ko-text-main"></div>
+
+    <div class="btn-row">
+      <button class="audio-btn" id="speakKo">🔊 韓国語</button>
+      <button class="audio-btn" id="speakEn">🔊 英語（正解）</button>
+      <button id="prevBtn" class="ghost">◀ 前の問題</button>
+      <button id="nextBtn" class="ghost">次の問題 ▶</button>
+    </div>
+
+    <div class="label">正しい英語の意味を選んでください（6択）</div>
+    <div id="options" class="mc-options"></div>
+
+    <div id="result" class="result"></div>
+    <div id="correctAnswer" class="correct-answer"></div>
+
+    <div id="exampleBlock" class="example-block">
+      <div class="label">例文</div>
+      <div class="example-line">
+        <strong>韓国語:</strong>
+        <span id="exKo"></span>
+        <!-- ★ ここが追加：例文の韓国語TTSボタン -->
+        <button class="audio-btn" id="exSpeakKo" style="margin-left:6px;">🔊 例文(韓国語)</button>
+      </div>
+      <div class="example-line"><strong>English:</strong> <span id="exEn"></span></div>
+      <div class="example-line"><strong>日本語:</strong> <span id="exJp"></span></div>
+    </div>
+  </div>
+
+  <div class="memo-block">
+    <div class="label">メモ（自由に使ってください・ブラウザを閉じると消えます）</div>
+    <textarea id="memoBox" placeholder="気づいたこと、自分なりの訳、連想イメージなどを書いておく場所"></textarea>
+  </div>
+
+  <div class="bottom-row">
+    <div>※音声はブラウザ／端末の読み上げ機能を使っています。</div>
+  </div>
+</div>
+
+<script>
+  // ===== 34フレーズ（例文用） =====
+  const PHRASES = [
+    {
+      id: 1,
+      jp: "お名前はなんですか？なんて呼んだらいいですか？",
+      ko: "이름이 뭐예요? 어떻게 부르면 돼요?",
+      en: "What is your name? What should I call you?"
+    },
+    {
+      id: 2,
+      jp: "出身地はどこですか？あなたの街で一番好きな場所はどこですか？",
+      ko: "고향이 어디예요? 그 동네에서 제일 좋아하는 곳이 어디예요?",
+      en: "Where are you from? What's your favorite place in your town?"
+    },
+    {
+      id: 3,
+      jp: "どこに住んでいますか？私は東京に住んでいます。あなたは？",
+      ko: "어디에 살고 있어요? 저는 도쿄에 살아요. 당신은요?",
+      en: "Where do you live? I live in Tokyo. How about you?"
+    },
+    {
+      id: 4,
+      jp: "元気？ / 最近どう？ / 調子どう？ / やっほー",
+      ko: "잘 지내? / 요즘 어때? / 요새 어때? / 안녕? / 야, 뭐 해?",
+      en: "How are you? / How's it going? / How are things? / Hey there!"
+    },
+    {
+      id: 5,
+      jp: "私は30歳です。あなたはどうですか？君も僕と一緒？",
+      ko: "나 서른 살이야. 너는? 우리 동갑이야?",
+      en: "I'm 30 years old. How about you? Are we the same age?"
+    },
+    {
+      id: 6,
+      jp: "はじめまして／もしかしてどこかで会ったことある？",
+      ko: "처음 뵙겠습니다만, 우리 혹시 어디서 본 적 있어요?",
+      en: "Nice to meet you. / Have we maybe met somewhere before?"
+    },
+    {
+      id: 7,
+      jp: "何をしていますか？一緒にはなそー",
+      ko: "지금 뭐 해? 같이 얘기하자. / 같이 얘기할래?",
+      en: "What are you doing? Let’s talk. / Wanna talk with me?"
+    },
+    {
+      id: 8,
+      jp: "日本語を話しますか？英語で話した方がいい？まだ韓国語上手じゃないんだ",
+      ko: "일본어 할 수 있어요? 영어로 말하는 게 나을까요? 아직 한국어 잘 못해요.",
+      en: "Do you speak Japanese? Is it better if we talk in English? My Korean isn’t very good yet."
+    },
+    {
+      id: 9,
+      jp: "なぜ韓国語を勉強していますか？好きになった韓国の人が一人いるからです。",
+      ko: "왜 한국어를 공부해요? 좋아하는 한국 사람이 한 명 있어서요.",
+      en: "Why are you studying Korean? Because there's someone Korean I like."
+    },
+    {
+      id: 10,
+      jp: "クリスマスはなにをして過ごしましたか。いつもすることはなんですか？",
+      ko: "크리스마스에는 뭐 하면서 지냈어요? 보통 뭐 해요?",
+      en: "What did you do for Christmas? What do you usually do?"
+    },
+    {
+      id: 11,
+      jp: "どれくらい英語を学んでいますか？おすすめの教材とかある？",
+      ko: "얼마나 동안 영어를 공부했어요? 추천하는 교재 같은 거 있어요?",
+      en: "How long have you been studying English? Do you have any recommended materials?"
+    },
+    {
+      id: 12,
+      jp: "趣味はなんですか？なにをしている時が一番落ち着く？",
+      ko: "취미가 뭐예요? 뭐 하고 있을 때가 제일 마음이 편해요?",
+      en: "What is your hobby? When do you feel the most relaxed?"
+    },
+    {
+      id: 13,
+      jp: "日本に旅行したことはありますか？記憶に残ってることとかある？",
+      ko: "일본에 여행 가 본 적 있어요? 기억에 남는 일이 있어요?",
+      en: "Have you ever traveled to Japan? Do you have any memorable experiences?"
+    },
+    {
+      id: 14,
+      jp: "友達になってもいいですか？もっとお互いのこと知ろ",
+      ko: "친구해도 돼요? 우리 서로에 대해서 더 알아가요.",
+      en: "Can we be friends? Let’s get to know each other more."
+    },
+    {
+      id: 15,
+      jp: "いつ初めて恋をしましたか？今、気になってる人は今いる？",
+      ko: "언제 처음 사랑을 했어요? 지금 좋아하는 사람 있어?",
+      en: "When did you first fall in love? Is there someone you like now?"
+    },
+    {
+      id: 16,
+      jp: "どんな音楽が好きですか？ライブとか行ったりする？",
+      ko: "어떤 음악을 좋아해요? 라이브 공연 같은 데도 가요?",
+      en: "What kind of music do you like? Do you go to live shows?"
+    },
+    {
+      id: 17,
+      jp: "irisはどういう意味ですか？英語だとなんていうんだろ",
+      ko: "iris는 무슨 뜻이에요? 영어로는 뭐라고 할까요?",
+      en: "What does \"iris\" mean? I wonder how you say it in English."
+    },
+    {
+      id: 18,
+      jp: "バスケができますか？部活はなにしてた？",
+      ko: "농구할 수 있어요? 학교 다닐 때는 무슨 동아리 했어요?",
+      en: "Can you play basketball? What club were you in at school?"
+    },
+    {
+      id: 19,
+      jp: "タバコはありますか？ビールがないと生きていけない",
+      ko: "담배 있어요? 저는 맥주 없이는 못 살아요.",
+      en: "Do you have a cigarette? I can’t live without beer."
+    },
+    {
+      id: 20,
+      jp: "もう一度言ってください。ゆっくりお話ししてもらってもいいですか",
+      ko: "제가 아직 잘 못 알아들어서요. 천천히 말해 주세요.",
+      en: "Please say it one more time. Could you speak more slowly?"
+    },
+    {
+      id: 21,
+      jp: "この服はいくらですか？もうちょっと安くならない？",
+      ko: "이 옷은 얼마예요? 조금만 더 싸게 안 될까요?",
+      en: "How much is this one? Can you make it a bit cheaper?"
+    },
+    {
+      id: 22,
+      jp: "全州に行きたいです。みんなおすすめって言ってたんだ",
+      ko: "전주에 가고 싶어요. 다들 좋다고 추천하더라고요.",
+      en: "I want to go to Jeonju. Everyone keeps recommending it."
+    },
+    {
+      id: 23,
+      jp: "職場まではどうやって行きますか？バスか電車、どっちが便利ですか？",
+      ko: "직장까지는 어떻게 가요? 버스랑 지하철 중에 뭐가 더 편해요?",
+      en: "How do you get to your workplace? Which is more convenient, the bus or the train?"
+    },
+    {
+      id: 24,
+      jp: "どの鍵が私のですか？間違えてあなたのと取り違えちゃってた",
+      ko: "어느 열쇠가 제 거예요? 잘못해서 당신 거랑 바꿔 들고 있었어요.",
+      en: "Which key is mine? I accidentally picked up yours instead."
+    },
+    {
+      id: 25,
+      jp: "あの方はどなたですか？有名な方ですか",
+      ko: "저분은 누구예요? 유명한 분이에요?",
+      en: "Who is that person? Are they famous?"
+    },
+    {
+      id: 26,
+      jp: "何時ですか？もうそろそろ寝る時間かな",
+      ko: "몇 시예요? 이제 슬슬 잘 시간인가 봐요.",
+      en: "What time is it? Maybe it’s about time to sleep."
+    },
+    {
+      id: 27,
+      jp: "おすすめの料理はなんですか？この食事に合うお酒はなんですか",
+      ko: "추천하는 요리가 뭐예요? 이 음식이랑 잘 어울리는 술은 뭐예요?",
+      en: "What dish do you recommend? What drink goes well with this meal?"
+    },
+    {
+      id: 28,
+      jp: "これをください。あと、これももらっていいですか",
+      ko: "이거 주세요. 그리고 이것도 같이 주실 수 있어요?",
+      en: "This one, please. And could I have this one as well?"
+    },
+    {
+      id: 29,
+      jp: "お会計をお願いします。現金で支払います／クレジットで",
+      ko: "계산해 주세요. 현금으로 할게요. / 카드로 할게요.",
+      en: "The check, please. I’ll pay in cash. / I’ll pay by card."
+    },
+    {
+      id: 30,
+      jp: "翻訳していただけますか？コーヒー今度奢るから",
+      ko: "번역해 주실 수 있어요? 다음에 커피 살게요.",
+      en: "Could you translate this for me? I'll buy you coffee next time."
+    },
+    {
+      id: 31,
+      jp: "話せてうれしいです。好きになっちゃう",
+      ko: "이야기하게 돼서 반가워요. / 이렇게 이야기하다 보니까 자꾸 좋아져요.",
+      en: "I'm glad to talk to you. / I feel like I'm starting to like you."
+    },
+    {
+      id: 32,
+      jp: "連絡ができてうれしいです／あなたが大好きです！",
+      ko: "연락하게 돼서 기뻐요. 당신을 정말 많이 좋아해요!",
+      en: "I'm happy we could get in touch. I really like you a lot!"
+    },
+    {
+      id: 33,
+      jp: "メッセージありがとうございます。僕とあなたが出会えたことは運命だと思う",
+      ko: "메시지 보내줘서 고마워요. 우리 만나게 된 건 운명인 것 같아요.",
+      en: "Thank you for your message. I think it’s fate that we met."
+    },
+    {
+      id: 34,
+      jp: "韓国語を教えてください〜。もっと勉強してあなたと話せるようになりたいです！",
+      ko: "한국어 가르쳐 주세요~ 더 공부해서 나중에 너랑 한국어로 많이 얘기할 수 있게 되고 싶어요.",
+      en: "Please teach me Korean~ I want to study more so I can talk with you a lot!"
+    }
+  ];
+
+  // ===== 単語データ 112語 =====
+  const WORDS = [
+    { id: 1,  ko: "이름",                      en: "name" },
+    { id: 2,  ko: "뭐",                        en: "what" },
+    { id: 3,  ko: "어떻게",                    en: "how" },
+    { id: 4,  ko: "부르다",                    en: "to call (someone by name)" },
+    { id: 5,  ko: "되다",                      en: "to become; to be okay" },
+    { id: 6,  ko: "고향",                      en: "hometown" },
+    { id: 7,  ko: "어디",                      en: "where" },
+    { id: 8,  ko: "그",                        en: "that (near the listener)" },
+    { id: 9,  ko: "동네",                      en: "neighborhood" },
+    { id: 10, ko: "제일",                      en: "the most; best" },
+    { id: 11, ko: "좋아하다",                  en: "to like" },
+    { id: 12, ko: "곳",                        en: "place" },
+    { id: 13, ko: "살다",                      en: "to live" },
+    { id: 14, ko: "있다",                      en: "to be; to exist; to have" },
+    { id: 15, ko: "저",                        en: "I (polite)" },
+    { id: 16, ko: "나",                        en: "I (casual)" },
+    { id: 17, ko: "너",                        en: "you (casual)" },
+    { id: 18, ko: "당신",                      en: "you (polite; context-sensitive)" },
+    { id: 19, ko: "잘",                        en: "well; nicely" },
+    { id: 20, ko: "지내다",                    en: "to get along; to be doing" },
+    { id: 21, ko: "요즘 / 요새",               en: "these days" },
+    { id: 22, ko: "안녕",                      en: "hi; hello" },
+    { id: 23, ko: "지금",                      en: "now" },
+    { id: 24, ko: "같이",                      en: "together" },
+    { id: 25, ko: "얘기하다 / 이야기하다",     en: "to talk; to chat" },
+    { id: 26, ko: "일본어",                    en: "Japanese (language)" },
+    { id: 27, ko: "영어",                      en: "English (language)" },
+    { id: 28, ko: "한국어",                    en: "Korean (language)" },
+    { id: 29, ko: "공부하다",                  en: "to study" },
+    { id: 30, ko: "사람",                      en: "person" },
+    { id: 31, ko: "한 명",                     en: "one person" },
+    { id: 32, ko: "크리스마스",                en: "Christmas" },
+    { id: 33, ko: "얼마나",                    en: "how long; how much" },
+    { id: 34, ko: "동안",                      en: "during; for (a period of time)" },
+    { id: 35, ko: "취미",                      en: "hobby" },
+    { id: 36, ko: "마음",                      en: "heart; feelings" },
+    { id: 37, ko: "편하다",                    en: "to feel comfortable; relaxed" },
+    { id: 38, ko: "일본",                      en: "Japan" },
+    { id: 39, ko: "여행",                      en: "trip; travel" },
+    { id: 40, ko: "기억",                      en: "memory" },
+    { id: 41, ko: "친구",                      en: "friend" },
+    { id: 42, ko: "서로",                      en: "each other" },
+    { id: 43, ko: "언제",                      en: "when" },
+    { id: 44, ko: "사랑",                      en: "love" },
+    { id: 45, ko: "음악",                      en: "music" },
+    { id: 46, ko: "라이브 공연",               en: "live concert; live show" },
+    { id: 47, ko: "뜻",                        en: "meaning" },
+    { id: 48, ko: "농구",                      en: "basketball" },
+    { id: 49, ko: "학교",                      en: "school" },
+    { id: 50, ko: "동아리",                    en: "(school) club; circle" },
+    { id: 51, ko: "담배",                      en: "cigarette" },
+    { id: 52, ko: "맥주",                      en: "beer" },
+    { id: 53, ko: "옷",                        en: "clothes" },
+    { id: 54, ko: "전주",                      en: "Jeonju (a city in Korea)" },
+    { id: 55, ko: "직장",                      en: "workplace" },
+    { id: 56, ko: "버스",                      en: "bus" },
+    { id: 57, ko: "지하철",                    en: "subway; metro" },
+    { id: 58, ko: "열쇠",                      en: "key" },
+    { id: 59, ko: "분",                        en: "person (honorific)" },
+    { id: 60, ko: "시간",                      en: "time" },
+    { id: 61, ko: "요리",                      en: "dish; cuisine" },
+    { id: 62, ko: "음식",                      en: "food" },
+    { id: 63, ko: "술",                        en: "alcohol; liquor" },
+    { id: 64, ko: "이거",                      en: "this (thing)" },
+    { id: 65, ko: "현금",                      en: "cash" },
+    { id: 66, ko: "카드",                      en: "card (credit card, etc.)" },
+    { id: 67, ko: "번역하다",                  en: "to translate" },
+    { id: 68, ko: "커피",                      en: "coffee" },
+    { id: 69, ko: "연락하다",                  en: "to contact" },
+    { id: 70, ko: "기쁘다",                    en: "to be glad; happy" },
+    { id: 71, ko: "메시지",                    en: "message" },
+    { id: 72, ko: "보내다",                    en: "to send" },
+    { id: 73, ko: "만나다 / 만나게 되다",      en: "to meet; to end up meeting" },
+    { id: 74, ko: "운명",                      en: "fate; destiny" },
+    { id: 75, ko: "가르치다",                  en: "to teach" },
+    { id: 76, ko: "더",                        en: "more" },
+    { id: 77, ko: "나중에",                    en: "later" },
+    { id: 78, ko: "많이",                      en: "a lot; much" },
+    { id: 79, ko: "싶다",                      en: "to want to (do)" },
+    { id: 80, ko: "할 수 있다",                en: "can do" },
+
+    { id: 81,  ko: "말하다",                   en: "to speak; to talk" },
+    { id: 82,  ko: "알다",                     en: "to know" },
+    { id: 83,  ko: "가다",                     en: "to go" },
+    { id: 84,  ko: "남다",                     en: "to remain; to stay" },
+    { id: 85,  ko: "다니다",                   en: "to attend; to go regularly" },
+    { id: 86,  ko: "없다",                     en: "to not exist; to not have" },
+    { id: 87,  ko: "알리다",                   en: "to let someone know; to tell" },
+    { id: 88,  ko: "추천하다",                 en: "to recommend" },
+    { id: 89,  ko: "교재",                     en: "textbook; study material" },
+    { id: 90,  ko: "일",                       en: "thing; matter; event" },
+    { id: 91,  ko: "어울리다",                 en: "to go well with; to suit" },
+    { id: 92,  ko: "유명하다",                 en: "to be famous" },
+    { id: 93,  ko: "자다",                     en: "to sleep" },
+    { id: 94,  ko: "계산하다",                 en: "to pay (the bill); to calculate" },
+    { id: 95,  ko: "좋아지다",                 en: "to become better; to come to like" },
+    { id: 96,  ko: "낫다",                     en: "to be better" },
+
+    { id: 97,  ko: "아직",                     en: "still; not yet" },
+    { id: 98,  ko: "보통",                     en: "usually" },
+    { id: 99,  ko: "조금만",                   en: "just a little (bit)" },
+    { id: 100, ko: "천천히",                   en: "slowly" },
+    { id: 101, ko: "다들",                     en: "everyone; all (people)" },
+    { id: 102, ko: "이렇게",                   en: "like this" },
+    { id: 103, ko: "정말",                     en: "really" },
+    { id: 104, ko: "자꾸",                     en: "repeatedly; keep (doing)" },
+    { id: 105, ko: "이제",                     en: "now; from now on" },
+    { id: 106, ko: "슬슬",                     en: "slowly; little by little" },
+    { id: 107, ko: "그리고",                   en: "and; and then" },
+    { id: 108, ko: "혹시",                     en: "by any chance" },
+
+    { id: 109, ko: "본 적 있다",               en: "to have experienced; to have done" },
+    { id: 110, ko: "기억에 남다",              en: "to remain in one’s memory" },
+    { id: 111, ko: "알아가다",                 en: "to get to know (gradually)" },
+    { id: 112, ko: "만나게 되다",              en: "to end up meeting; to come to meet" }
+  ];
+
+  // ===== ユーティリティ =====
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function speak(text, lang) {
+    if (!("speechSynthesis" in window)) {
+      alert("このブラウザは音声読み上げに対応していません。");
+      return;
+    }
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = lang;
+    synth.speak(utter);
+  }
+
+  // 単語が含まれる例文を1つ探す（だいたいのマッチでOKなゆるいルール）
+  function findExampleForWord(koWord) {
+    let base = koWord.split("/")[0].trim();
+    if (base.endsWith("다")) {
+      base = base.slice(0, base.length - 1);
+    }
+    for (const ph of PHRASES) {
+      if (ph.ko.includes(base)) {
+        return ph;
+      }
+    }
+    return null;
+  }
+
+  // ===== DOM 取得 =====
+  const koWordEl        = document.getElementById("koWord");
+  const optionsEl       = document.getElementById("options");
+  const resultEl        = document.getElementById("result");
+  const correctAnswerEl = document.getElementById("correctAnswer");
+  const exKoEl          = document.getElementById("exKo");
+  const exEnEl          = document.getElementById("exEn");
+  const exJpEl          = document.getElementById("exJp");
+  const exSpeakKoBtn    = document.getElementById("exSpeakKo"); // ★ 追加
+
+  const qIndexEl        = document.getElementById("qIndex");
+  const qTotalEl        = document.getElementById("qTotal");
+  const nextBtn         = document.getElementById("nextBtn");
+  const prevBtn         = document.getElementById("prevBtn");
+  const speakKoBtn      = document.getElementById("speakKo");
+  const speakEnBtn      = document.getElementById("speakEn");
+
+  const modeOrderBtn    = document.getElementById("modeOrderBtn");
+  const modeShuffleBtn  = document.getElementById("modeShuffleBtn");
+
+  qTotalEl.textContent = WORDS.length.toString();
+
+  // いま画面に表示している例文（韓国語）のテキストを保持
+  let currentExampleKo = "";
+
+  // ===== 出題順管理（順番 / シャッフル） =====
+  let mode = "order";    // "order" or "shuffle"
+  let deck = [];         // 出題順（インデックスの配列）
+  let pos = 0;           // deck の中で今どこか
+
+  function buildDeck() {
+    deck = [...Array(WORDS.length).keys()];
+    if (mode === "shuffle") {
+      shuffleArray(deck);
+    }
+    pos = 0;
+  }
+
+  function updateModeButtons() {
+    if (mode === "order") {
+      modeOrderBtn.classList.add("mode-active");
+      modeOrderBtn.classList.remove("mode-inactive");
+      modeShuffleBtn.classList.add("mode-inactive");
+      modeShuffleBtn.classList.remove("mode-active");
+    } else {
+      modeShuffleBtn.classList.add("mode-active");
+      modeShuffleBtn.classList.remove("mode-inactive");
+      modeOrderBtn.classList.add("mode-inactive");
+      modeOrderBtn.classList.remove("mode-active");
+    }
+  }
+
+  function getCurrentIndex() {
+    return deck[pos];
+  }
+
+  // ===== 画面表示 =====
+  function buildOptions() {
+    const currentIndex = getCurrentIndex();
+    const data = WORDS[currentIndex];
+    const correctText = data.en;
+
+    const candidates = [];
+    for (let i = 0; i < WORDS.length; i++) {
+      if (i !== currentIndex) candidates.push(i);
+    }
+    shuffleArray(candidates);
+    const wrongIndices = candidates.slice(0, 5);
+
+    const options = [{ text: correctText, correct: true }];
+    wrongIndices.forEach(idx => {
+      options.push({ text: WORDS[idx].en, correct: false });
+    });
+    shuffleArray(options);
+
+    optionsEl.innerHTML = "";
+    options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mc-option";
+      btn.textContent = opt.text;
+      btn.dataset.correct = opt.correct ? "true" : "false";
+      btn.addEventListener("click", () => handleChoice(btn));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function showQuestion(clear = true) {
+    const currentIndex = getCurrentIndex();
+    const data = WORDS[currentIndex];
+    koWordEl.textContent = data.ko;
+    qIndexEl.textContent = (pos + 1).toString();
+
+    if (clear) {
+      resultEl.textContent = "";
+      resultEl.className = "result";
+      correctAnswerEl.textContent = "";
+      exKoEl.textContent = "";
+      exEnEl.textContent = "";
+      exJpEl.textContent = "";
+      currentExampleKo = "";  // 例文リセット
+    }
+
+    buildOptions();
+  }
+
+  // ===== 解答処理 =====
+  function handleChoice(btn) {
+    const isCorrect = btn.dataset.correct === "true";
+    const currentIndex = getCurrentIndex();
+
+    if (isCorrect) {
+      resultEl.textContent = "✅ 正解！";
+      resultEl.className = "result correct";
+    } else {
+      resultEl.textContent = "❌ 不正解…";
+      resultEl.className = "result incorrect";
+    }
+    const correctText = WORDS[currentIndex].en;
+    correctAnswerEl.textContent = "正解：" + correctText;
+
+    const allBtns = optionsEl.querySelectorAll(".mc-option");
+    allBtns.forEach(b => {
+      b.disabled = true;
+      if (b.dataset.correct === "true") {
+        b.classList.add("correct-choice");
+      } else if (b === btn && !isCorrect) {
+        b.classList.add("wrong-choice");
+      }
+    });
+
+    const wordKo = WORDS[currentIndex].ko;
+    const example = findExampleForWord(wordKo);
+    if (example) {
+      exKoEl.textContent = example.ko;
+      exEnEl.textContent = example.en;
+      exJpEl.textContent = example.jp;
+      currentExampleKo = example.ko;
+    } else {
+      exKoEl.textContent = "(この単語を含む例文はまだ登録していません)";
+      exEnEl.textContent = "";
+      exJpEl.textContent = "";
+      currentExampleKo = "";
+    }
+  }
+
+  // ===== ナビゲーション =====
+  nextBtn.addEventListener("click", () => {
+    pos++;
+    if (pos >= deck.length) {
+      pos = 0;
+    }
+    showQuestion(true);
+  });
+
+  prevBtn.addEventListener("click", () => {
+    pos--;
+    if (pos < 0) {
+      pos = deck.length - 1;
+    }
+    showQuestion(true);
+  });
+
+  // ===== TTSボタン =====
+  speakKoBtn.addEventListener("click", () => {
+    const currentIndex = getCurrentIndex();
+    speak(WORDS[currentIndex].ko, "ko-KR");
+  });
+
+  speakEnBtn.addEventListener("click", () => {
+    const currentIndex = getCurrentIndex();
+    speak(WORDS[currentIndex].en, "en-US");
+  });
+
+  // ★ 例文の韓国語TTS
+  exSpeakKoBtn.addEventListener("click", () => {
+    if (currentExampleKo) {
+      speak(currentExampleKo, "ko-KR");
+    }
+  });
+
+  // ===== モード切替 =====
+  modeOrderBtn.addEventListener("click", () => {
+    if (mode !== "order") {
+      mode = "order";
+      updateModeButtons();
+      buildDeck();
+      showQuestion(true);
+    } else {
+      buildDeck();
+      showQuestion(true);
+    }
+  });
+
+  modeShuffleBtn.addEventListener("click", () => {
+    if (mode !== "shuffle") {
+      mode = "shuffle";
+      updateModeButtons();
+      buildDeck();
+      showQuestion(true);
+    } else {
+      buildDeck();
+      showQuestion(true);
+    }
+  });
+
+  // ===== 初期化 =====
+  buildDeck();
+  updateModeButtons();
+  showQuestion(true);
+</script>
+</body>
+</html>
