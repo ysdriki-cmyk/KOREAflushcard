@@ -1,24 +1,34 @@
 const CONFIG = window.APP_CONFIG || {};
 
 const state = {
+  allWords: [],
   words: [],
+  categories: [],
+  selectedCategory: "",
   mode: localStorage.getItem(CONFIG.modeStorageKey || "korean-flashcard-mode") || "order",
   deck: [],
   pos: 0,
-  currentExampleKo: "",
-  sourceLabel: ""
+  currentExampleKo: ""
 };
 
 const elements = {
   appTitle: document.getElementById("appTitle"),
   appSubtitle: document.getElementById("appSubtitle"),
-  dataSourceLabel: document.getElementById("dataSourceLabel"),
   reloadBtn: document.getElementById("reloadBtn"),
+  startScreen: document.getElementById("startScreen"),
+  categorySummary: document.getElementById("categorySummary"),
+  categoryCountBadge: document.getElementById("categoryCountBadge"),
+  quickActionButtons: document.getElementById("quickActionButtons"),
+  categoryButtons: document.getElementById("categoryButtons"),
+  quizScreen: document.getElementById("quizScreen"),
+  currentCategory: document.getElementById("currentCategory"),
   qIndex: document.getElementById("qIndex"),
   qTotal: document.getElementById("qTotal"),
+  backToCategoriesBtn: document.getElementById("backToCategoriesBtn"),
   modeOrderBtn: document.getElementById("modeOrderBtn"),
   modeShuffleBtn: document.getElementById("modeShuffleBtn"),
   koWord: document.getElementById("koWord"),
+  optionsLabel: document.getElementById("optionsLabel"),
   options: document.getElementById("options"),
   result: document.getElementById("result"),
   correctAnswer: document.getElementById("correctAnswer"),
@@ -140,9 +150,21 @@ function normalizeRows(rows) {
       exampleKoDisplay: row.example_ko_display || row.exampleKoDisplay || "",
       exampleKoTts: row.example_ko_tts || row.exampleKoTts || row.example_ko_display || "",
       exampleEn: row.example_en || row.exampleEn || "",
-      exampleJp: row.example_jp || row.exampleJp || ""
+      exampleJp: row.example_jp || row.exampleJp || "",
+      category: row.category || row.Category || row.category_name || row["カテゴリ"] || ""
     }))
     .filter((row) => row.ko && row.en);
+}
+
+function collectCategories(words) {
+  const counts = new Map();
+  words.forEach((word) => {
+    if (!word.category) {
+      return;
+    }
+    counts.set(word.category, (counts.get(word.category) || 0) + 1);
+  });
+  return Array.from(counts, ([name, count]) => ({ name, count }));
 }
 
 async function fetchCsv(url) {
@@ -159,14 +181,12 @@ async function loadWords() {
   const sources = [];
   if (CONFIG.googleSheetCsvUrl) {
     sources.push({
-      url: CONFIG.googleSheetCsvUrl,
-      label: "Googleスプレッドシート"
+      url: CONFIG.googleSheetCsvUrl
     });
   }
   if (CONFIG.fallbackCsvPath) {
     sources.push({
-      url: CONFIG.fallbackCsvPath,
-      label: "ローカルCSV"
+      url: CONFIG.fallbackCsvPath
     });
   }
 
@@ -179,10 +199,8 @@ async function loadWords() {
       if (!parsed.length) {
         throw new Error("有効な単語行が見つかりませんでした。");
       }
-      state.words = parsed;
-      state.sourceLabel = `${source.label}を使用中`;
-      elements.dataSourceLabel.textContent = state.sourceLabel;
-      elements.qTotal.textContent = String(state.words.length);
+      state.allWords = parsed;
+      state.categories = collectCategories(parsed);
       return;
     } catch (error) {
       lastError = error;
@@ -200,12 +218,35 @@ function buildDeck() {
   state.pos = 0;
 }
 
+function setScreen(showQuiz) {
+  elements.startScreen.classList.toggle("hidden", showQuiz);
+  elements.quizScreen.classList.toggle("hidden", !showQuiz);
+}
+
+function updateOptionsLabel() {
+  const choiceCount = Math.min(6, Math.max(state.words.length, 1));
+  elements.optionsLabel.textContent = `正しい英語の意味を選んでください（${choiceCount}択）`;
+}
+
+function updateQuizHeader() {
+  elements.currentCategory.textContent = state.selectedCategory || "全カテゴリ";
+  elements.qTotal.textContent = String(state.words.length);
+  elements.backToCategoriesBtn.classList.toggle("hidden", !state.categories.length);
+  updateOptionsLabel();
+}
+
 function updateModeButtons() {
   const orderActive = state.mode === "order";
   elements.modeOrderBtn.classList.toggle("mode-active", orderActive);
   elements.modeOrderBtn.classList.toggle("mode-inactive", !orderActive);
   elements.modeShuffleBtn.classList.toggle("mode-active", !orderActive);
   elements.modeShuffleBtn.classList.toggle("mode-inactive", orderActive);
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  localStorage.setItem(CONFIG.modeStorageKey || "korean-flashcard-mode", state.mode);
+  updateModeButtons();
 }
 
 function getCurrentWord() {
@@ -251,11 +292,95 @@ function buildOptions() {
   });
 }
 
+function getWordsForCategory(categoryName) {
+  if (!categoryName) {
+    return [...state.allWords];
+  }
+  return state.allWords.filter((word) => word.category === categoryName);
+}
+
+function createSelectionButton({ label, countText, description = "", className = "", onClick }) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `category-btn ${className}`.trim();
+  button.addEventListener("click", onClick);
+
+  const main = document.createElement("div");
+  main.className = "category-main";
+
+  const name = document.createElement("span");
+  name.className = "category-name";
+  name.textContent = label;
+  main.appendChild(name);
+
+  if (description) {
+    const note = document.createElement("span");
+    note.className = "category-note";
+    note.textContent = description;
+    main.appendChild(note);
+  }
+
+  const side = document.createElement("div");
+  side.className = "category-side";
+
+  const count = document.createElement("span");
+  count.className = "category-count";
+  count.textContent = countText;
+
+  const arrow = document.createElement("span");
+  arrow.className = "category-arrow";
+  arrow.textContent = ">";
+
+  side.append(count, arrow);
+  button.append(main, side);
+  return button;
+}
+
+function renderCategoryButtons() {
+  elements.quickActionButtons.innerHTML = "";
+  elements.categoryButtons.innerHTML = "";
+  elements.categoryCountBadge.textContent = `${state.categories.length}カテゴリ`;
+
+  const allButton = createSelectionButton({
+    label: "全カテゴリ",
+    countText: `${state.allWords.length}問`,
+    description: "登録されている全問題を順番に学習",
+    className: "category-btn-primary",
+    onClick: () => startQuiz("", { mode: "order" })
+  });
+
+  elements.quickActionButtons.appendChild(allButton);
+
+  state.categories.forEach((category) => {
+    const button = createSelectionButton({
+      label: category.name,
+      countText: `${category.count}問`,
+      description: "このカテゴリだけで演習",
+      onClick: () => startQuiz(category.name)
+    });
+    elements.categoryButtons.appendChild(button);
+  });
+}
+
+function showCategoryPicker() {
+  elements.categorySummary.textContent =
+    `全${state.allWords.length}問 / ${state.categories.length}カテゴリ。カテゴリが増えるとここも自動で増えます。`;
+  elements.currentCategory.textContent = "未選択";
+  elements.qIndex.textContent = "0";
+  elements.qTotal.textContent = "0";
+  elements.koWord.textContent = "カテゴリを選ぶと問題が始まります";
+  elements.options.innerHTML = "";
+  clearFeedback();
+  renderCategoryButtons();
+  setScreen(false);
+}
+
 function showQuestion() {
   if (!state.words.length) {
     return;
   }
 
+  updateQuizHeader();
   const currentWord = getCurrentWord();
   elements.koWord.textContent = currentWord.ko;
   elements.qIndex.textContent = String(state.pos + 1);
@@ -295,14 +420,36 @@ function moveQuestion(step) {
   showQuestion();
 }
 
+function startQuiz(categoryName, { mode } = {}) {
+  if (mode) {
+    setMode(mode);
+  }
+  state.selectedCategory = categoryName;
+  state.words = getWordsForCategory(categoryName);
+  elements.errorMessage.textContent = "";
+
+  if (!state.words.length) {
+    throw new Error("このカテゴリには表示できる問題がありません。");
+  }
+
+  buildDeck();
+  updateModeButtons();
+  setScreen(true);
+  showQuestion();
+}
+
 function bindEvents() {
   elements.reloadBtn.addEventListener("click", async () => {
-    elements.dataSourceLabel.textContent = "再読込中...";
+    const keepCategoryPicker = !elements.startScreen.classList.contains("hidden");
     try {
-      await initializeQuiz();
+      await initializeQuiz({ openCategoryPicker: keepCategoryPicker });
     } catch (error) {
       showError(error);
     }
+  });
+
+  elements.backToCategoriesBtn.addEventListener("click", () => {
+    showCategoryPicker();
   });
 
   elements.nextBtn.addEventListener("click", () => moveQuestion(1));
@@ -323,17 +470,13 @@ function bindEvents() {
   });
 
   elements.modeOrderBtn.addEventListener("click", () => {
-    state.mode = "order";
-    localStorage.setItem(CONFIG.modeStorageKey || "korean-flashcard-mode", state.mode);
-    updateModeButtons();
+    setMode("order");
     buildDeck();
     showQuestion();
   });
 
   elements.modeShuffleBtn.addEventListener("click", () => {
-    state.mode = "shuffle";
-    localStorage.setItem(CONFIG.modeStorageKey || "korean-flashcard-mode", state.mode);
-    updateModeButtons();
+    setMode("shuffle");
     buildDeck();
     showQuestion();
   });
@@ -347,19 +490,35 @@ function bindEvents() {
 function showError(error) {
   const message = error instanceof Error ? error.message : String(error);
   elements.errorMessage.textContent = message;
-  elements.dataSourceLabel.textContent = "データ読込エラー";
+  setScreen(true);
+  elements.currentCategory.textContent = "-";
+  elements.qIndex.textContent = "0";
+  elements.qTotal.textContent = "0";
   elements.koWord.textContent = "データを読み込めませんでした";
   elements.options.innerHTML = "";
   clearFeedback();
 }
 
-async function initializeQuiz() {
+async function initializeQuiz({ openCategoryPicker = false } = {}) {
   await loadWords();
-  updateModeButtons();
-  buildDeck();
-  showQuestion();
+
+  if (state.categories.length) {
+    const canResumeCurrentCategory =
+      !openCategoryPicker &&
+      (!state.selectedCategory || state.categories.some((category) => category.name === state.selectedCategory));
+
+    if (canResumeCurrentCategory) {
+      startQuiz(state.selectedCategory);
+      return;
+    }
+
+    showCategoryPicker();
+    return;
+  }
+
+  startQuiz("");
 }
 
 applyConfig();
 bindEvents();
-initializeQuiz().catch(showError);
+initializeQuiz({ openCategoryPicker: true }).catch(showError);

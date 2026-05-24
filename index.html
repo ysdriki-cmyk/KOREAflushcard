@@ -10,59 +10,86 @@
   <div class="app">
     <h1 id="appTitle">韓国語単語 6択テスト</h1>
     <div class="sub" id="appSubtitle">
-      公開GoogleスプレッドシートまたはローカルCSVから単語リストを読み込みます。
+      韓国語とその意味を学習するツールになります。
     </div>
 
     <div class="status-bar">
-      <div id="dataSourceLabel">データ読込中...</div>
       <button id="reloadBtn" class="ghost small-btn" type="button">再読込</button>
     </div>
 
-    <div class="top-row">
-      <div>問題：<span id="qIndex">0</span> / <span id="qTotal">0</span></div>
-      <div class="mode-buttons">
-        <button id="modeOrderBtn" class="mode-btn mode-active" type="button">順番モード</button>
-        <button id="modeShuffleBtn" class="mode-btn mode-inactive" type="button">シャッフルモード</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="label">韓国語（問題）</div>
-      <div id="koWord" class="ko-text-main">読込中...</div>
-
-      <div class="btn-row">
-        <button class="audio-btn" id="speakKo" type="button">韓国語を読む</button>
-        <button class="audio-btn" id="speakEn" type="button">英語を読む</button>
-        <button id="prevBtn" class="ghost" type="button">前の問題</button>
-        <button id="nextBtn" class="ghost" type="button">次の問題</button>
-      </div>
-
-      <div class="label">正しい英語の意味を選んでください（6択）</div>
-      <div id="options" class="mc-options"></div>
-
-      <div id="result" class="result"></div>
-      <div id="correctAnswer" class="correct-answer"></div>
-
-      <div id="exampleBlock" class="example-block">
-        <div class="label">例文</div>
-        <div class="example-line">
-          <strong>韓国語:</strong>
-          <span id="exKo"></span>
-          <button class="audio-btn" id="exSpeakKo" type="button">例文を読む</button>
+    <div id="startScreen" class="start-screen hidden">
+      <div class="picker-card">
+        <div class="picker-kicker">Category Select</div>
+        <h2 class="picker-title">学習するカテゴリを選んでください</h2>
+        <div class="picker-copy">
+          カテゴリごとに問題セットを切り替えて演習できます。
         </div>
-        <div class="example-line"><strong>English:</strong> <span id="exEn"></span></div>
-        <div class="example-line"><strong>日本語:</strong> <span id="exJp"></span></div>
+        <div id="categorySummary" class="category-summary"></div>
+        <div class="picker-section">
+          <div class="picker-section-title">すぐに始める</div>
+          <div id="quickActionButtons" class="selection-list"></div>
+        </div>
+        <div class="picker-section">
+          <div class="picker-section-head">
+            <div class="picker-section-title">カテゴリ一覧</div>
+            <div id="categoryCountBadge" class="picker-section-badge"></div>
+          </div>
+          <div id="categoryButtons" class="selection-list"></div>
+        </div>
       </div>
     </div>
 
-    <div class="memo-block">
-      <div class="label">メモ（ブラウザを閉じると消えます）</div>
-      <textarea id="memoBox" placeholder="気づいたこと、自分なりの訳、連想イメージなどを書いておく場所"></textarea>
-    </div>
+    <div id="quizScreen" class="quiz-screen">
+      <div class="top-row">
+        <div class="progress-block">
+          <div>カテゴリ：<span id="currentCategory">全カテゴリ</span></div>
+          <div>問題：<span id="qIndex">0</span> / <span id="qTotal">0</span></div>
+        </div>
+        <div class="mode-buttons">
+          <button id="backToCategoriesBtn" class="ghost mode-btn hidden" type="button">カテゴリ選択</button>
+          <button id="modeOrderBtn" class="mode-btn mode-active" type="button">順番モード</button>
+          <button id="modeShuffleBtn" class="mode-btn mode-inactive" type="button">シャッフルモード</button>
+        </div>
+      </div>
 
-    <div class="bottom-row">
-      <div>Cloudflare Pagesへそのまま配置できる静的サイト構成です。</div>
-      <div id="errorMessage" class="error-message"></div>
+      <div class="card">
+        <div class="label">韓国語（問題）</div>
+        <div id="koWord" class="ko-text-main">読込中...</div>
+
+        <div class="btn-row">
+          <button class="audio-btn" id="speakKo" type="button">韓国語を読む</button>
+          <button class="audio-btn" id="speakEn" type="button">英語を読む</button>
+          <button id="prevBtn" class="ghost" type="button">前の問題</button>
+          <button id="nextBtn" class="ghost" type="button">次の問題</button>
+        </div>
+
+        <div id="optionsLabel" class="label">正しい英語の意味を選んでください（最大6択）</div>
+        <div id="options" class="mc-options"></div>
+
+        <div id="result" class="result"></div>
+        <div id="correctAnswer" class="correct-answer"></div>
+
+        <div id="exampleBlock" class="example-block">
+          <div class="label">例文</div>
+          <div class="example-line">
+            <strong>韓国語:</strong>
+            <span id="exKo"></span>
+            <button class="audio-btn" id="exSpeakKo" type="button">例文を読む</button>
+          </div>
+          <div class="example-line"><strong>English:</strong> <span id="exEn"></span></div>
+          <div class="example-line"><strong>日本語:</strong> <span id="exJp"></span></div>
+        </div>
+      </div>
+
+      <div class="memo-block">
+        <div class="label">メモ（ブラウザを閉じると消えます）</div>
+        <textarea id="memoBox" placeholder="気づいたこと、自分なりの訳、連想イメージなどを書いておく場所"></textarea>
+      </div>
+
+      <div class="bottom-row">
+        <div>Cloudflare Pagesへそのまま配置できる静的サイト構成です。</div>
+        <div id="errorMessage" class="error-message"></div>
+      </div>
     </div>
   </div>
 

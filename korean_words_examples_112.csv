@@ -1,4 +1,4 @@
-id,ko_word,word_en,example_ko_display,example_ko_tts,example_en,example_jp
+id,ko_word,word_en,example_ko_display,example_ko_tts,example_en,example_jp,category
 1,이름,name,name 제 이름은 유나예요.,제 이름은 유나예요.,My name is Yuna.,私の名前はユナです。
 2,뭐,what,what 이거 뭐예요?,이거 뭐예요?,What is this?,これは何ですか？
 3,어떻게,how,how 어떻게 가요?,어떻게 가요?,How do I get there?,どうやって行きますか？

@@ -21,15 +21,19 @@
 ヘッダーは次の形にしてください。
 
 ```csv
-id,ko_word,word_en,example_ko_display,example_ko_tts,example_en,example_jp
+id,ko_word,word_en,example_ko_display,example_ko_tts,example_en,example_jp,category
 ```
 
 例:
 
 ```csv
-1,이름,name,제 이름은 유나예요.,제 이름은 유나예요.,My name is Yuna.,私の名前はユナです。
-2,뭐,what,이거 뭐예요?,이거 뭐예요?,What is this?,これは何ですか？
+1,이름,name,제 이름은 유나예요.,제 이름은 유나예요.,My name is Yuna.,私の名前はユナです。,基本単語
+2,뭐,what,이거 뭐예요?,이거 뭐예요?,What is this?,これは何ですか？,基本単語
 ```
+
+- `category` に値が入っていると、最初の画面でカテゴリごとの問題セットを選べます
+- `category` が空の行は `全カテゴリ` を選んだときにまとめて学習できます
+- 同じカテゴリ名の行は同じ問題セットとして扱われます。例: `ベーシック`、`発展`
 
 ## Googleスプレッドシート公開URLの作り方
 
@@ -48,7 +52,7 @@ https://docs.google.com/spreadsheets/d/e/XXXXXXXXXXXXXXXXXXXXXXXX/pub?gid=0&sing
 ```js
 window.APP_CONFIG = {
   appTitle: "韓国語単語 6択テスト",
-  appSubtitle: "公開Googleスプレッドシートの内容を更新すると、次回読込時に表示内容も変わります。",
+  appSubtitle: "韓国語とその意味を学習するツールになります。",
   googleSheetCsvUrl: "ここに公開CSV URLを入れる",
   fallbackCsvPath: "./korean_words_examples_112.csv",
   memoStorageKey: "korean-flashcard-memo",
